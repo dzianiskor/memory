@@ -15,7 +15,7 @@ const LoginPage: React.FC = () => {
   return (
     <div
       className={s.loginWrapper}
-      style={{ backgroundImage: `url("/img/login/login.jpg")` }}
+      style={{ backgroundImage: `url("/img/menu/main.jpg")` }}
     >
       {code ? (
         <h1>Please wait...</h1>
