@@ -1,0 +1,39 @@
+@import "../../variables";
+
+.tableImageWrapper {
+  margin-top: 20px;
+}
+.tableImage {
+  width: $bigDesktopContent;
+  height: 768px;
+  margin: auto;
+  background: no-repeat center center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+
+@media (max-width: $desktop) {
+  .tableImage {
+    width: $desktopContent;
+  }
+}
+
+@media (max-width: $tablet) {
+  .tableImageWrapper {
+    margin: 30px 5px 5px 5px;
+  }
+  .tableImage {
+    width: auto;
+  }
+}
+
+@media (max-width: $phone) {
+  .tableImageWrapper {
+    margin: 5px;
+  }
+  .tableImage {
+    width: auto;
+  }
+}

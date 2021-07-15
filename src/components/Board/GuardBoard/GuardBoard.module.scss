@@ -1,0 +1,8 @@
+.guardBoard {
+    display: contents;
+    pointer-events: none;
+}
+
+.guardBoardAllowed {
+    pointer-events: auto;
+}

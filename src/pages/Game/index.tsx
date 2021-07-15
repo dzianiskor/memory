@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import s from "./Game.module.scss";
+import Board from "../../components/Board/Board";
 
 const GamePage: React.FC = () => {
   return (
@@ -10,7 +11,9 @@ const GamePage: React.FC = () => {
       style={{ backgroundImage: `url("/img/backgrounds/6.jpg")` }}
     >
       <Header />
-      <main>Main</main>
+      <main>
+        <Board />
+      </main>
       <Footer />
     </div>
   );
