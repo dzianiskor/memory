@@ -1,0 +1,74 @@
+@import "../../variables";
+
+header {
+    margin: auto;
+    width: $bigDesktopContent;
+    position: relative;
+    .score {
+        color: $third;
+        padding: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        position: relative;
+    }
+    .avatar img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+    .avatarBorder img {
+        width: 480px;
+        height: auto;
+        position: absolute;
+        right: 0;
+        left: 0;
+        margin: auto;
+        top: -20px;
+        filter: invert(68%) sepia(59%) saturate(4020%) hue-rotate(360deg) brightness(103%) contrast(106%);
+    }
+    .timer {
+        position: absolute;
+        right: 0;
+        top: 27px;
+        color: $white;
+        font-size: 18px;
+    }
+}
+
+
+@media (max-width: $desktop) {
+    header {
+        width: $desktopContent;
+    }
+}
+
+@mixin tplTimerForSmall($top) {
+    position: relative;
+    margin: auto;
+    text-align: center;
+    top: $top;
+}
+
+@media (max-width: $tablet) {
+    header {
+        width: $tabletContent;
+        .timer {
+            @include tplTimerForSmall('10px');
+        }
+    }
+}
+
+@media (max-width: $phone) {
+    header {
+        width: auto;
+        .avatarBorder img {
+            display: none;
+        }
+        .timer {
+            @include tplTimerForSmall(0);
+        }
+    }
+}
