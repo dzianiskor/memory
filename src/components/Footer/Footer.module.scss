@@ -1,0 +1,87 @@
+@import "../../variables";
+
+footer {
+  color: $third;
+  font-size: 20px;
+  margin: 10px auto;
+  width: $bigDesktopContent;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  a {
+    text-decoration: none;
+    color: $third;
+    &:hover {
+      color: $white;
+    }
+  }
+  .footerLinks {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    span {
+      margin-right: 20px;
+    }
+  }
+  .buttonGroupWrapper {
+    display: flex;
+    justify-content: flex-end;
+    .buttonGroup {
+      margin: 0 8px;
+    }
+  }
+  .settingButton {
+    background-color: $second;
+    border: $second;
+    border-radius: 4px;
+    padding: 5px 15px;
+    &:hover {
+      box-shadow: none;
+      transition: .25s;
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+    &:focus, &:active {
+      box-shadow: 0 0 0 0.25rem rgba(248, 148, 6,.25);
+    }
+    img {
+      width: 25px;
+      height: 25px;
+      filter: invert(1);
+    }
+  }
+}
+
+@media (max-width: $desktop) {
+  footer {
+    width: $desktopContent;
+  }
+}
+
+@mixin smallMenu($width) {
+  width: $width;
+  flex-direction: column;
+  align-items: center;
+  .buttonGroupWrapper {
+    width: 100%;
+    justify-content: space-around;
+  }
+  .buttonGroup {
+    width: 25%;
+  }
+  .settingButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: $tablet) {
+  footer {
+    @include smallMenu($tabletContent);
+  }
+}
+
+@media (max-width: $phone) {
+  footer {
+    @include smallMenu(auto);
+  }
+}

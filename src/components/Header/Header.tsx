@@ -13,8 +13,8 @@ const Header: React.FC = () => (
           alt="avatar"
         />
       </span>
-      <span>Player:&nbsp;</span>
-      <span className={s.scoreCount}>100</span>
+      <span>Player...&nbsp;:&nbsp;</span>
+      <span className={s.scoreCount}>99999+</span>
     </div>
     <div className={s.timer}>Time 00:00</div>
   </header>

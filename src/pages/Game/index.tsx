@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 import s from "./Game.module.scss";
 
 const GamePage: React.FC = () => {
@@ -10,7 +11,7 @@ const GamePage: React.FC = () => {
     >
       <Header />
       <main>Main</main>
-      <footer>Footer</footer>
+      <Footer />
     </div>
   );
 };
