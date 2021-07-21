@@ -2,12 +2,13 @@ import React from "react";
 import s from "./Card.module.scss";
 
 interface ICard {
-  cardId: number;
+  id: number | string;
+  cardId: number | string;
   status: string;
-  changeStatus: () => void;
+  changeStatus: (id: string | number, cardId: string | number) => void;
 }
 
-const Card: React.FC<ICard> = ({ cardId, status, changeStatus }) => {
+const Card: React.FC<ICard> = ({ id, cardId, status, changeStatus }) => {
   const pathHero = `/img/heroes/${cardId}.png`;
   const pathWrapper = `/img/wrappers/1.png`;
 
@@ -17,7 +18,7 @@ const Card: React.FC<ICard> = ({ cardId, status, changeStatus }) => {
   }
 
   return (
-    <div className={classes.join(" ")} onClick={() => changeStatus()}>
+    <div className={classes.join(" ")} onClick={() => changeStatus(id, cardId)}>
       <div className={s.front}>
         <img src={pathWrapper} alt="Wrapper" />
       </div>
