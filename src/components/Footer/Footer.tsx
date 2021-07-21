@@ -23,13 +23,22 @@ const Footer: React.FC = () => {
       </div>
       <div className={s.footerLinks}>
         <span>
-          <a href="https://github.com/dzianiskor/react-game">GitHub</a>
+          <a
+            href="https://github.com/dzianiskor/memory"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub
+          </a>
         </span>
         <span>
-          <a href="https://www.youtube.com/watch?v=Z4ClOMxCYy8">YouTube</a>
-        </span>
-        <span>
-          <a href="https://rs.school/js/">RS.School</a>
+          <a
+            href="https://www.linkedin.com/in/dzianiskor/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            LinkedIn
+          </a>
         </span>
         <span>© 2021</span>
       </div>

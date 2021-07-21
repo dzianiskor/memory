@@ -1,8 +1,10 @@
 import React from "react";
 import s from "./GuardBoard.module.scss";
+import { useSelector } from "react-redux";
+import { getGuardBoardAllowed } from "../../../redux/reducers/board";
 
 const GuardBoard: React.FC = ({ children }) => {
-  const guardAllowed = true;
+  const guardAllowed = useSelector(getGuardBoardAllowed);
 
   const classes = [s.guardBoard];
   if (guardAllowed) {

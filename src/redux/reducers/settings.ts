@@ -11,7 +11,7 @@ export interface IMainProperties {
   path: string;
 }
 
-interface ISettings {
+export interface ISettings {
   arena: IMainProperties;
   table: IMainProperties;
   wrapperCard: IMainProperties;

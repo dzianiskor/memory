@@ -1,4 +1,5 @@
 import { CardsActionTypes } from "../actionTypes/cards";
+import { IInitialState } from "../rootReducer";
 
 interface IPayload {
   id?: number | string;
@@ -19,7 +20,7 @@ export interface ICard {
   path: string;
 }
 
-interface ICards {
+export interface ICards {
   cards: ICard[];
   compareCard: any;
 }
@@ -85,7 +86,7 @@ const cards = (state: ICards = initialState, action: IAction) => {
   }
 };
 
-export const getCards: any = (state: any) => state.cards.cards;
-export const getCompareCard: any = (state: any) => state.cards.compareCard;
+export const getCards = (state: IInitialState) => state.cards.cards;
+export const getCompareCard = (state: IInitialState) => state.cards.compareCard;
 
 export default cards;
