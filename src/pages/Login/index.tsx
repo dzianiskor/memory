@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button } from "react-bootstrap";
 import s from "./Login.module.scss";
 
 const LoginPage: React.FC = () => {
@@ -21,15 +22,16 @@ const LoginPage: React.FC = () => {
         <h1>Please wait...</h1>
       ) : (
         <a className={s.loginLink} href="/">
-          <button
-            className="btn btn-primary btn-lg"
+          <Button
+            variant="primary"
+            size="lg"
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               mockLogin(e);
             }}
           >
             <img src="/img/github.png" alt="cat" />
             <span>Login with GitHub</span>
-          </button>
+          </Button>
         </a>
       )}
     </div>

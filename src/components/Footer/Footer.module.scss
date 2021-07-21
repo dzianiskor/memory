@@ -35,7 +35,8 @@ footer {
     background-color: $second;
     border: $second;
     border-radius: 4px;
-    padding: 5px 15px;
+    padding: 2px 15px 5px;
+
     &:hover {
       box-shadow: none;
       transition: .25s;
