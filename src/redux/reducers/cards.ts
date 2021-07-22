@@ -81,6 +81,17 @@ const cards = (state: ICards = initialState, action: IAction) => {
         ...state,
         compareCard: null,
       };
+    case CardsActionTypes.CLOSE_CARDS:
+      return {
+        ...state,
+        cards: state.cards.map((card) => {
+          return { ...card, status: "failCard" };
+        }),
+      };
+    case CardsActionTypes.RESTART_GAME:
+      return {
+        ...initialState,
+      };
     default:
       return state;
   }

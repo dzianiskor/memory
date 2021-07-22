@@ -30,3 +30,15 @@ export function addCompareCard(id: number | string) {
     payload: { id },
   };
 }
+
+export function restartCards() {
+  return {
+    type: CardsActionTypes.RESTART_GAME,
+  };
+}
+
+export function closeCards() {
+  return {
+    type: CardsActionTypes.CLOSE_CARDS,
+  };
+}

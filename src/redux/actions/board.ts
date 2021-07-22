@@ -18,3 +18,9 @@ export function incrementTimer() {
     type: BoardActionTypes.INCREMENT_TIMER,
   };
 }
+
+export function restartBoard() {
+  return {
+    type: BoardActionTypes.RESTART_GAME,
+  };
+}

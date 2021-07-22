@@ -39,6 +39,10 @@ const board = (state: IBoard = initialState, action: IAction) => {
         ...state,
         timer: state.timer + 1,
       };
+    case BoardActionTypes.RESTART_GAME:
+      return {
+        ...initialState,
+      };
     default:
       return state;
   }

@@ -9,12 +9,15 @@ import { getScore } from "../../redux/reducers/board";
 import {
   incrementScore,
   incrementTimer,
+  restartBoard,
   setGuardBoardAllowed,
 } from "../../redux/actions/board";
 import {
   addCompareCard,
   clearCompareCard,
   clickOnCard,
+  closeCards,
+  restartCards,
   setStatusTwoCards,
 } from "../../redux/actions/cards";
 
@@ -28,12 +31,14 @@ const Board: React.FC = () => {
   const timer: { current: NodeJS.Timeout | null } = useRef(null);
 
   useEffect(() => {
-    timer.current = setInterval(() => {
-      dispatch(incrementTimer());
-    }, 1000);
+    if (!showResult) {
+      timer.current = setInterval(() => {
+        dispatch(incrementTimer());
+      }, 1000);
 
-    return () => clearInterval(timer.current as NodeJS.Timeout);
-  }, [dispatch]);
+      return () => clearInterval(timer.current as NodeJS.Timeout);
+    }
+  }, [dispatch, showResult]);
 
   useEffect(() => {
     checkFinishGame();
@@ -50,8 +55,12 @@ const Board: React.FC = () => {
   };
 
   const restartGame = () => {
-    console.log("Restart game");
-    setShowResult(false);
+    dispatch(closeCards());
+    setTimeout(() => {
+      dispatch(restartBoard());
+      dispatch(restartCards());
+      setShowResult(false);
+    }, 1000);
   };
 
   const changeStatus = (id: string | number, cardId: number | string) => {
