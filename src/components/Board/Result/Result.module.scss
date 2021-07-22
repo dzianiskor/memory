@@ -1,0 +1,70 @@
+@import "../../../variables";
+
+.resultWrapper {
+    text-align: center;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: black;
+    font-size: 18px;
+    position: absolute;
+    width: 100%;
+    min-height: 100vh;
+    top: 0;
+    background: rgba(255, 228, 196,0.4);
+    .result {
+        background-color: bisque;
+        border-radius: 5%;
+        padding: 20px;
+        width: 500px;
+        height: 600px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .resultSection {
+            margin: 10px;
+            button {
+                margin: 1px;
+            }
+            button:hover {
+                transition: .5s;
+                color: $white;
+                background-color: $primary;
+            }
+            button.active {
+                color: $white;
+                background-color: $primary;
+                font-size: 20px;
+            }
+            h1 {
+                color: $success;
+            }
+            .total {
+                color: $primary;
+            }
+        }
+    }
+}
+
+@media (max-width: $tablet) {
+    .resultWrapper{
+        .result {
+            width: 400px;
+            height: 400px;
+        }
+    }
+}
+
+@media (max-width: $phone) {
+    .resultWrapper{
+        .result {
+            width: 90%;
+        }
+    }
+}
+
+
+
+

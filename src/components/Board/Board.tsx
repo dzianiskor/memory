@@ -1,33 +1,58 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import GuardBoard from "./GuardBoard/GuardBoard";
+import Result from "./Result/Result";
 import Card from "./Card/Card";
 import s from "./Board.module.scss";
 import { useDispatch, useSelector } from "react-redux";
+import { getCards, getCompareCard, ICard } from "../../redux/reducers/cards";
+import { getScore } from "../../redux/reducers/board";
+import {
+  incrementScore,
+  incrementTimer,
+  setGuardBoardAllowed,
+} from "../../redux/actions/board";
 import {
   addCompareCard,
   clearCompareCard,
   clickOnCard,
   setStatusTwoCards,
 } from "../../redux/actions/cards";
-import { getCards, getCompareCard, ICard } from "../../redux/reducers/cards";
-import {
-  incrementScore,
-  incrementTimer,
-  setGuardBoardAllowed,
-} from "../../redux/actions/board";
 
 const Board: React.FC = () => {
   const dispatch = useDispatch();
   const cards: ICard[] = useSelector(getCards);
   const compareCard: ICard = useSelector(getCompareCard);
+  const score = useSelector(getScore);
+
+  const [showResult, setShowResult] = useState<boolean>(false);
+  const timer: { current: NodeJS.Timeout | null } = useRef(null);
 
   useEffect(() => {
-    const timerIntervalId = setInterval(() => {
+    timer.current = setInterval(() => {
       dispatch(incrementTimer());
     }, 1000);
 
-    return () => clearInterval(timerIntervalId);
+    return () => clearInterval(timer.current as NodeJS.Timeout);
   }, [dispatch]);
+
+  useEffect(() => {
+    checkFinishGame();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [score]);
+
+  const checkFinishGame = () => {
+    const countSuccessCards = cards.filter(
+      (card) => card.status === "successCard"
+    ).length;
+    if (countSuccessCards === /*cards.length*/ 2) {
+      setShowResult(true);
+    }
+  };
+
+  const restartGame = () => {
+    console.log("Restart game");
+    setShowResult(false);
+  };
 
   const changeStatus = (id: string | number, cardId: number | string) => {
     dispatch(setGuardBoardAllowed(false));
@@ -71,6 +96,9 @@ const Board: React.FC = () => {
             />
           ))}
         </GuardBoard>
+        {showResult && (
+          <Result timerIntervalId={timer.current} restartGame={restartGame} />
+        )}
       </div>
     </div>
   );
