@@ -1,4 +1,5 @@
 import { SettingsActionTypes } from "../actionTypes/settings";
+import { IInitialState } from "../rootReducer";
 
 interface IAction {
   type: SettingsActionTypes;
@@ -15,6 +16,8 @@ export interface ISettings {
   arena: IMainProperties;
   table: IMainProperties;
   wrapperCard: IMainProperties;
+  musicValue: number;
+  soundValue: number;
 }
 
 const initialState: ISettings = {
@@ -33,6 +36,8 @@ const initialState: ISettings = {
     name: "Standard",
     path: "1.png",
   },
+  musicValue: 0.3,
+  soundValue: 0.5,
 };
 
 const settings = (state: ISettings = initialState, action: IAction) => {
@@ -46,5 +51,10 @@ const settings = (state: ISettings = initialState, action: IAction) => {
       return state;
   }
 };
+
+export const getMusicValue = (state: IInitialState) =>
+  state.settings.musicValue;
+export const getSoundValue = (state: IInitialState) =>
+  state.settings.soundValue;
 
 export default settings;
