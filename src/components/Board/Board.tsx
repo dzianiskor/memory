@@ -4,6 +4,7 @@ import useSound from "use-sound";
 import GuardBoard from "./GuardBoard/GuardBoard";
 import Result from "./Result/Result";
 import Card from "./Card/Card";
+import Settings from "./Settings/Settings";
 import s from "./Board.module.scss";
 import { getCards, getCompareCard, ICard } from "../../redux/reducers/cards";
 import { getScore } from "../../redux/reducers/board";
@@ -11,6 +12,7 @@ import successSound from "../../sounds/success.mp3";
 import failSound from "../../sounds/error.mp3";
 import clickSound from "../../sounds/click.mp3";
 import music from "../../sounds/music.mp3";
+import soundMenu from "../../sounds/menu.mp3";
 import {
   incrementScore,
   incrementTimer,
@@ -25,7 +27,11 @@ import {
   restartCards,
   setStatusTwoCards,
 } from "../../redux/actions/cards";
-import { getMusicValue, getSoundValue } from "../../redux/reducers/settings";
+import {
+  getIsShowSettings,
+  getMusicValue,
+  getSoundValue,
+} from "../../redux/reducers/settings";
 
 const Board: React.FC = () => {
   const dispatch = useDispatch();
@@ -48,9 +54,13 @@ const Board: React.FC = () => {
   const [playClickSound, playClickSoundDriver] = useSound(clickSound, {
     volume: soundValue,
   });
+  const [playSoundMenu, playSoundMenuDriver] = useSound(soundMenu, {
+    volume: soundValue,
+  });
 
   const [showResult, setShowResult] = useState<boolean>(false);
   const timer: { current: NodeJS.Timeout | null } = useRef(null);
+  const isShowSettings = useSelector(getIsShowSettings);
 
   useEffect(() => {
     if (!showResult) {
@@ -76,6 +86,7 @@ const Board: React.FC = () => {
       playFailSoundDriver.stop();
       playClickSoundDriver.stop();
       playMusicSoundDriver.stop();
+      playSoundMenuDriver.stop();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playMusic]);
@@ -90,6 +101,7 @@ const Board: React.FC = () => {
   };
 
   const restartGame = () => {
+    playSoundMenu();
     dispatch(closeCards());
     playClickSound();
     setTimeout(() => {
@@ -147,6 +159,7 @@ const Board: React.FC = () => {
         {showResult && (
           <Result timerIntervalId={timer.current} restartGame={restartGame} />
         )}
+        {isShowSettings && <Settings />}
       </div>
     </div>
   );

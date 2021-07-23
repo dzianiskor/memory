@@ -7,3 +7,15 @@ export function setArena(arena: IMainProperties) {
     payload: arena,
   };
 }
+
+export function showSettings() {
+  return {
+    type: SettingsActionTypes.SHOW_SETTINGS,
+  };
+}
+
+export function hideSettings() {
+  return {
+    type: SettingsActionTypes.HIDE_SETTINGS,
+  };
+}

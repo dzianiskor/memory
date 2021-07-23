@@ -1,3 +1,5 @@
 export enum SettingsActionTypes {
   SET_ARENA = "SET_ARENA",
+  SHOW_SETTINGS = "SHOW_SETTINGS",
+  HIDE_SETTINGS = "HIDE_SETTINGS",
 }

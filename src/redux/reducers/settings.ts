@@ -18,6 +18,7 @@ export interface ISettings {
   wrapperCard: IMainProperties;
   musicValue: number;
   soundValue: number;
+  isShowSettings: boolean;
 }
 
 const initialState: ISettings = {
@@ -38,6 +39,7 @@ const initialState: ISettings = {
   },
   musicValue: 0.3,
   soundValue: 0.5,
+  isShowSettings: false,
 };
 
 const settings = (state: ISettings = initialState, action: IAction) => {
@@ -46,6 +48,16 @@ const settings = (state: ISettings = initialState, action: IAction) => {
       return {
         ...state,
         arena: action.payload,
+      };
+    case SettingsActionTypes.SHOW_SETTINGS:
+      return {
+        ...state,
+        isShowSettings: true,
+      };
+    case SettingsActionTypes.HIDE_SETTINGS:
+      return {
+        ...state,
+        isShowSettings: false,
       };
     default:
       return state;
@@ -56,5 +68,7 @@ export const getMusicValue = (state: IInitialState) =>
   state.settings.musicValue;
 export const getSoundValue = (state: IInitialState) =>
   state.settings.soundValue;
+export const getIsShowSettings = (state: IInitialState) =>
+  state.settings.isShowSettings;
 
 export default settings;
