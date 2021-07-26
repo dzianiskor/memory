@@ -1,5 +1,6 @@
 import { SettingsActionTypes } from "../actionTypes/settings";
 import { IInitialState } from "../rootReducer";
+import { getStartArena } from "../../utils/containers/arena/arena";
 
 interface IAction {
   type: SettingsActionTypes;
@@ -10,6 +11,7 @@ export interface IMainProperties {
   id: number | string;
   name: string;
   path: string;
+  active: boolean;
 }
 
 export interface ISettings {
@@ -22,20 +24,18 @@ export interface ISettings {
 }
 
 const initialState: ISettings = {
-  arena: {
-    id: 1,
-    name: "Fight",
-    path: "1.jpg",
-  },
+  arena: getStartArena(),
   table: {
     id: 1,
     name: "Type 1",
     path: "1.jpg",
+    active: true,
   },
   wrapperCard: {
     id: 1,
     name: "Standard",
     path: "1.png",
+    active: true,
   },
   musicValue: 0.3,
   soundValue: 0.5,
@@ -59,6 +59,16 @@ const settings = (state: ISettings = initialState, action: IAction) => {
         ...state,
         isShowSettings: false,
       };
+    case SettingsActionTypes.SET_MUSIC:
+      return {
+        ...state,
+        musicValue: action.payload,
+      };
+    case SettingsActionTypes.SET_SOUND:
+      return {
+        ...state,
+        soundValue: action.payload,
+      };
     default:
       return state;
   }
@@ -70,5 +80,6 @@ export const getSoundValue = (state: IInitialState) =>
   state.settings.soundValue;
 export const getIsShowSettings = (state: IInitialState) =>
   state.settings.isShowSettings;
+export const getArena = (state: IInitialState) => state.settings.arena;
 
 export default settings;

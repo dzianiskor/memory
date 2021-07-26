@@ -19,3 +19,17 @@ export function hideSettings() {
     type: SettingsActionTypes.HIDE_SETTINGS,
   };
 }
+
+export function setMusicValue(value: number) {
+  return {
+    type: SettingsActionTypes.SET_MUSIC,
+    payload: value,
+  };
+}
+
+export function setSoundValue(value: number) {
+  return {
+    type: SettingsActionTypes.SET_SOUND,
+    payload: value,
+  };
+}
