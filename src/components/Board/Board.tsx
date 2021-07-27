@@ -25,14 +25,17 @@ import {
   clickOnCard,
   closeCards,
   restartCards,
+  setCardsDeck,
   setStatusTwoCards,
 } from "../../redux/actions/cards";
 import {
   getBoard,
+  getDifficult,
   getIsShowSettings,
   getMusicValue,
   getSoundValue,
 } from "../../redux/reducers/settings";
+import { getStartDeck } from "../../utils/containers/deck/deck";
 
 const Board: React.FC = () => {
   const dispatch = useDispatch();
@@ -63,6 +66,17 @@ const Board: React.FC = () => {
   const [showResult, setShowResult] = useState<boolean>(false);
   const timer: { current: NodeJS.Timeout | null } = useRef(null);
   const isShowSettings = useSelector(getIsShowSettings);
+  const difficult = useSelector(getDifficult);
+
+  useEffect(() => {
+    if (timer.current) {
+      const deck = getStartDeck(difficult);
+      playClickSound();
+      dispatch(restartBoard());
+      dispatch(setCardsDeck(deck));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [difficult]);
 
   useEffect(() => {
     if (!showResult) {

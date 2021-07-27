@@ -1,5 +1,6 @@
 import { SettingsActionTypes } from "../actionTypes/settings";
 import { IMainProperties } from "../reducers/settings";
+import { IDifficult } from "../../utils/containers/difficult/difficult";
 
 export function showSettings() {
   return {
@@ -45,5 +46,12 @@ export function setWrapperCard(wrapperCard: IMainProperties) {
   return {
     type: SettingsActionTypes.SET_WRAPPER_CARD,
     payload: wrapperCard,
+  };
+}
+
+export function setDifficult(difficult: IDifficult) {
+  return {
+    type: SettingsActionTypes.SET_DIFFICULT,
+    payload: difficult,
   };
 }

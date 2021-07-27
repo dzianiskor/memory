@@ -3,10 +3,14 @@ import { IInitialState } from "../rootReducer";
 import { getStartArena } from "../../utils/containers/arena/arena";
 import { getStartBoard } from "../../utils/containers/board/board";
 import { getStartWrapperCard } from "../../utils/containers/wrapperCard/wrapperCard";
+import {
+  getStartDifficult,
+  IDifficult,
+} from "../../utils/containers/difficult/difficult";
 
 interface IAction {
   type: SettingsActionTypes;
-  payload: string[] | number[] | IMainProperties;
+  payload: string[] | number[] | IMainProperties | IDifficult;
 }
 
 export interface IMainProperties {
@@ -20,6 +24,7 @@ export interface ISettings {
   arena: IMainProperties;
   board: IMainProperties;
   wrapperCard: IMainProperties;
+  difficult: IDifficult;
   musicValue: number;
   soundValue: number;
   isShowSettings: boolean;
@@ -29,6 +34,7 @@ const initialState: ISettings = {
   arena: getStartArena(),
   board: getStartBoard(),
   wrapperCard: getStartWrapperCard(),
+  difficult: getStartDifficult(),
   musicValue: 0.3,
   soundValue: 0.5,
   isShowSettings: false,
@@ -71,6 +77,11 @@ const settings = (state: ISettings = initialState, action: IAction) => {
         ...state,
         wrapperCard: action.payload,
       };
+    case SettingsActionTypes.SET_DIFFICULT:
+      return {
+        ...state,
+        difficult: action.payload,
+      };
     default:
       return state;
   }
@@ -86,5 +97,6 @@ export const getArena = (state: IInitialState) => state.settings.arena;
 export const getBoard = (state: IInitialState) => state.settings.board;
 export const getWrapperCard = (state: IInitialState) =>
   state.settings.wrapperCard;
+export const getDifficult = (state: IInitialState) => state.settings.difficult;
 
 export default settings;

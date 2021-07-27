@@ -1,4 +1,12 @@
 import { CardsActionTypes } from "../actionTypes/cards";
+import { ICard } from "../reducers/cards";
+
+export function setCardsDeck(cards: ICard[]) {
+  return {
+    type: CardsActionTypes.SET_CARDS_DECK,
+    payload: cards,
+  };
+}
 
 export function clickOnCard(id: number | string) {
   return {

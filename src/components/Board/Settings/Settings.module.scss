@@ -19,7 +19,7 @@
     border-radius: 5%;
     padding: 20px;
     width: 500px;
-    height: 600px;
+    min-height: 600px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -52,7 +52,7 @@
   .settingsWrapper{
     .settings {
       width: 400px;
-      height: 400px;
+      min-height: 400px;
     }
   }
 }

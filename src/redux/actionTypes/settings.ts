@@ -6,4 +6,5 @@ export enum SettingsActionTypes {
   SET_ARENA = "SET_ARENA",
   SET_BOARD = "SET_BOARD",
   SET_WRAPPER_CARD = "SET_WRAPPER_CARD",
+  SET_DIFFICULT = "SET_DIFFICULT",
 }

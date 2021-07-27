@@ -5,6 +5,7 @@ import s from "./Settings.module.scss";
 import {
   getArena,
   getBoard,
+  getDifficult,
   getMusicValue,
   getSoundValue,
   getWrapperCard,
@@ -14,6 +15,7 @@ import {
   hideSettings,
   setArena,
   setBoard,
+  setDifficult,
   setMusicValue,
   setSoundValue,
   setWrapperCard,
@@ -21,6 +23,7 @@ import {
 import { getArenaList } from "../../../utils/containers/arena/arena";
 import { getBoardList } from "../../../utils/containers/board/board";
 import { getWrapperCardList } from "../../../utils/containers/wrapperCard/wrapperCard";
+import { getDifficultList } from "../../../utils/containers/difficult/difficult";
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -29,6 +32,7 @@ const Settings = () => {
   const currentArena = useSelector(getArena);
   const currentBoard = useSelector(getBoard);
   const currentWrapperCard = useSelector(getWrapperCard);
+  const currentDifficult = useSelector(getDifficult);
   const [playSoundMenu, playSoundMenuDriver] = useSound(soundMenu, {
     volume: soundValue,
   });
@@ -135,6 +139,25 @@ const Settings = () => {
         </div>
         <div className={s.settingCard}>
           <div>Difficult:</div>
+          <div>
+            {getDifficultList().map((difficult) =>
+              currentDifficult.id === difficult.id ? (
+                <button key={difficult.id} className={s.active}>
+                  {difficult.value}
+                </button>
+              ) : (
+                <button
+                  key={difficult.id}
+                  onClick={() => {
+                    playSoundMenu();
+                    dispatch(setDifficult(difficult));
+                  }}
+                >
+                  {difficult.value}
+                </button>
+              )
+            )}
+          </div>
         </div>
         <div className={s.settingCard}>
           <button
