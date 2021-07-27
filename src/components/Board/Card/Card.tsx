@@ -4,7 +4,10 @@ import useSound from "use-sound";
 import s from "./Card.module.scss";
 import clickSound from "../../../sounds/click.mp3";
 import hoverSound from "../../../sounds/hover.mp3";
-import { getSoundValue } from "../../../redux/reducers/settings";
+import {
+  getSoundValue,
+  getWrapperCard,
+} from "../../../redux/reducers/settings";
 
 interface ICard {
   id: number | string;
@@ -14,8 +17,9 @@ interface ICard {
 }
 
 const Card: React.FC<ICard> = ({ id, cardId, status, changeStatus }) => {
+  const wrapperCard = useSelector(getWrapperCard);
   const pathHero = `/img/heroes/${cardId}.png`;
-  const pathWrapper = `/img/wrappers/1.png`;
+  const pathWrapper = `/img/wrappers/${wrapperCard.path}`;
   const soundValue = useSelector(getSoundValue);
 
   const [playClickSound, playClickSoundDriver] = useSound(clickSound, {

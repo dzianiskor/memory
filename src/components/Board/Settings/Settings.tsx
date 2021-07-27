@@ -4,23 +4,31 @@ import useSound from "use-sound";
 import s from "./Settings.module.scss";
 import {
   getArena,
+  getBoard,
   getMusicValue,
   getSoundValue,
+  getWrapperCard,
 } from "../../../redux/reducers/settings";
 import soundMenu from "../../../sounds/menu.mp3";
 import {
   hideSettings,
   setArena,
+  setBoard,
   setMusicValue,
   setSoundValue,
+  setWrapperCard,
 } from "../../../redux/actions/settings";
 import { getArenaList } from "../../../utils/containers/arena/arena";
+import { getBoardList } from "../../../utils/containers/board/board";
+import { getWrapperCardList } from "../../../utils/containers/wrapperCard/wrapperCard";
 
 const Settings = () => {
   const dispatch = useDispatch();
   const musicValue = useSelector(getMusicValue);
   const soundValue = useSelector(getSoundValue);
   const currentArena = useSelector(getArena);
+  const currentBoard = useSelector(getBoard);
+  const currentWrapperCard = useSelector(getWrapperCard);
   const [playSoundMenu, playSoundMenuDriver] = useSound(soundMenu, {
     volume: soundValue,
   });
@@ -83,9 +91,47 @@ const Settings = () => {
         </div>
         <div className={s.settingCard}>
           <div>Type Board:</div>
+          <div>
+            {getBoardList().map((board) =>
+              currentBoard.id === board.id ? (
+                <button key={board.id} className={s.active}>
+                  {board.name}
+                </button>
+              ) : (
+                <button
+                  key={board.id}
+                  onClick={() => {
+                    playSoundMenu();
+                    dispatch(setBoard(board));
+                  }}
+                >
+                  {board.name}
+                </button>
+              )
+            )}
+          </div>
         </div>
         <div className={s.settingCard}>
           <div>Type Wrapper Cards:</div>
+          <div>
+            {getWrapperCardList().map((wrapperCard) =>
+              currentWrapperCard.id === wrapperCard.id ? (
+                <button key={wrapperCard.id} className={s.active}>
+                  {wrapperCard.name}
+                </button>
+              ) : (
+                <button
+                  key={wrapperCard.id}
+                  onClick={() => {
+                    playSoundMenu();
+                    dispatch(setWrapperCard(wrapperCard));
+                  }}
+                >
+                  {wrapperCard.name}
+                </button>
+              )
+            )}
+          </div>
         </div>
         <div className={s.settingCard}>
           <div>Difficult:</div>

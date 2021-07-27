@@ -28,6 +28,7 @@ import {
   setStatusTwoCards,
 } from "../../redux/actions/cards";
 import {
+  getBoard,
   getIsShowSettings,
   getMusicValue,
   getSoundValue,
@@ -41,6 +42,7 @@ const Board: React.FC = () => {
 
   const musicValue = useSelector(getMusicValue);
   const soundValue = useSelector(getSoundValue);
+  const board = useSelector(getBoard);
 
   const [playMusic, playMusicSoundDriver] = useSound(music, {
     volume: musicValue,
@@ -142,7 +144,7 @@ const Board: React.FC = () => {
       <div
         className={s.tableImage}
         style={{
-          backgroundImage: `url("/img/tables/1.jpg")`,
+          backgroundImage: `url("/img/tables/${board.path}")`,
         }}
       >
         <GuardBoard>

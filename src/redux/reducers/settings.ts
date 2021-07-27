@@ -1,6 +1,8 @@
 import { SettingsActionTypes } from "../actionTypes/settings";
 import { IInitialState } from "../rootReducer";
 import { getStartArena } from "../../utils/containers/arena/arena";
+import { getStartBoard } from "../../utils/containers/board/board";
+import { getStartWrapperCard } from "../../utils/containers/wrapperCard/wrapperCard";
 
 interface IAction {
   type: SettingsActionTypes;
@@ -16,7 +18,7 @@ export interface IMainProperties {
 
 export interface ISettings {
   arena: IMainProperties;
-  table: IMainProperties;
+  board: IMainProperties;
   wrapperCard: IMainProperties;
   musicValue: number;
   soundValue: number;
@@ -25,18 +27,8 @@ export interface ISettings {
 
 const initialState: ISettings = {
   arena: getStartArena(),
-  table: {
-    id: 1,
-    name: "Type 1",
-    path: "1.jpg",
-    active: true,
-  },
-  wrapperCard: {
-    id: 1,
-    name: "Standard",
-    path: "1.png",
-    active: true,
-  },
+  board: getStartBoard(),
+  wrapperCard: getStartWrapperCard(),
   musicValue: 0.3,
   soundValue: 0.5,
   isShowSettings: false,
@@ -44,11 +36,6 @@ const initialState: ISettings = {
 
 const settings = (state: ISettings = initialState, action: IAction) => {
   switch (action.type) {
-    case SettingsActionTypes.SET_ARENA:
-      return {
-        ...state,
-        arena: action.payload,
-      };
     case SettingsActionTypes.SHOW_SETTINGS:
       return {
         ...state,
@@ -69,6 +56,21 @@ const settings = (state: ISettings = initialState, action: IAction) => {
         ...state,
         soundValue: action.payload,
       };
+    case SettingsActionTypes.SET_ARENA:
+      return {
+        ...state,
+        arena: action.payload,
+      };
+    case SettingsActionTypes.SET_BOARD:
+      return {
+        ...state,
+        board: action.payload,
+      };
+    case SettingsActionTypes.SET_WRAPPER_CARD:
+      return {
+        ...state,
+        wrapperCard: action.payload,
+      };
     default:
       return state;
   }
@@ -81,5 +83,8 @@ export const getSoundValue = (state: IInitialState) =>
 export const getIsShowSettings = (state: IInitialState) =>
   state.settings.isShowSettings;
 export const getArena = (state: IInitialState) => state.settings.arena;
+export const getBoard = (state: IInitialState) => state.settings.board;
+export const getWrapperCard = (state: IInitialState) =>
+  state.settings.wrapperCard;
 
 export default settings;
