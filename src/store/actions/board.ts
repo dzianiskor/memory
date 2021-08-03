@@ -3,7 +3,7 @@ import { BoardActionTypes } from "../actionTypes/board";
 export function setGuardBoardAllowed(status: boolean) {
   return {
     type: BoardActionTypes.SET_GUARD_BOARD_ALLOWED,
-    payload: { status },
+    payload: status,
   };
 }
 

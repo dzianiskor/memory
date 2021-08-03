@@ -1,5 +1,5 @@
 import { SettingsActionTypes } from "../actionTypes/settings";
-import { IMainProperties } from "../reducers/settings";
+import {IMainProperties} from "../interfaces/settings";
 import { IDifficult } from "../../utils/containers/difficult/difficult";
 
 export function showSettings() {

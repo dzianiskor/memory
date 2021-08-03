@@ -1,20 +1,6 @@
 import { BoardActionTypes } from "../actionTypes/board";
 import { IInitialState } from "../rootReducer";
-
-interface IPayload {
-  status?: boolean;
-}
-
-interface IAction {
-  type: BoardActionTypes;
-  payload?: IPayload;
-}
-
-export interface IBoard {
-  guardBoardAllowed: boolean;
-  score: number;
-  timer: number;
-}
+import {IAction, IBoard} from "../interfaces/board";
 
 const initialState: IBoard = {
   guardBoardAllowed: true,
@@ -27,7 +13,7 @@ const board = (state: IBoard = initialState, action: IAction) => {
     case BoardActionTypes.SET_GUARD_BOARD_ALLOWED:
       return {
         ...state,
-        guardBoardAllowed: action.payload!.status,
+        guardBoardAllowed: action.payload,
       };
     case BoardActionTypes.INCREMENT_SCORE:
       return {

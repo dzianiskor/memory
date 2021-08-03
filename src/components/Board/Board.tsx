@@ -6,8 +6,8 @@ import Result from "./Result/Result";
 import Card from "./Card/Card";
 import Settings from "./Settings/Settings";
 import s from "./Board.module.scss";
-import { getCards, getCompareCard, ICard } from "../../redux/reducers/cards";
-import { getScore } from "../../redux/reducers/board";
+import { getCards, getCompareCard } from "../../store/reducers/cards";
+import { getScore } from "../../store/reducers/board";
 import successSound from "../../sounds/success.mp3";
 import failSound from "../../sounds/error.mp3";
 import clickSound from "../../sounds/click.mp3";
@@ -19,7 +19,7 @@ import {
   incrementTimer,
   restartBoard,
   setGuardBoardAllowed,
-} from "../../redux/actions/board";
+} from "../../store/actions/board";
 import {
   addCompareCard,
   clearCompareCard,
@@ -28,14 +28,15 @@ import {
   restartCards,
   setCardsDeck,
   setStatusTwoCards,
-} from "../../redux/actions/cards";
+} from "../../store/actions/cards";
 import {
   getBoard,
   getDifficult,
   getIsShowSettings,
   getMusicValue,
   getSoundValue,
-} from "../../redux/reducers/settings";
+} from "../../store/reducers/settings";
+import { ICard } from "../../store/interfaces/cards";
 
 const Board: React.FC = () => {
   const dispatch = useDispatch();

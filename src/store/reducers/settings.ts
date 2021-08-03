@@ -3,32 +3,8 @@ import { IInitialState } from "../rootReducer";
 import { getStartArena } from "../../utils/containers/arena/arena";
 import { getStartBoard } from "../../utils/containers/board/board";
 import { getStartWrapperCard } from "../../utils/containers/wrapperCard/wrapperCard";
-import {
-  getStartDifficult,
-  IDifficult,
-} from "../../utils/containers/difficult/difficult";
-
-interface IAction {
-  type: SettingsActionTypes;
-  payload: string[] | number[] | IMainProperties | IDifficult;
-}
-
-export interface IMainProperties {
-  id: number | string;
-  name: string;
-  path: string;
-  active: boolean;
-}
-
-export interface ISettings {
-  arena: IMainProperties;
-  board: IMainProperties;
-  wrapperCard: IMainProperties;
-  difficult: IDifficult;
-  musicValue: number;
-  soundValue: number;
-  isShowSettings: boolean;
-}
+import {getStartDifficult} from "../../utils/containers/difficult/difficult";
+import {IAction, ISettings} from "../interfaces/settings";
 
 const initialState: ISettings = {
   arena: getStartArena(),

@@ -4,11 +4,11 @@ import useSound from "use-sound";
 import s from "./Card.module.scss";
 import clickSound from "../../../sounds/click.mp3";
 import hoverSound from "../../../sounds/hover.mp3";
-import { ICard } from "../../../redux/reducers/cards";
+import { ICard } from "../../../store/interfaces/cards";
 import {
   getSoundValue,
   getWrapperCard,
-} from "../../../redux/reducers/settings";
+} from "../../../store/reducers/settings";
 
 interface ICardFunc {
   card: ICard;

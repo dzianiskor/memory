@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import useSound from "use-sound";
 import s from "./Menu.module.scss";
 import soundMenu from "../../sounds/menu.mp3";
-import { getSoundValue } from "../../redux/reducers/settings";
+import { getSoundValue } from "../../store/reducers/settings";
 
 const MenuPage: React.FC = () => {
   const soundValue = useSelector(getSoundValue);

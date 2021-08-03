@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import useSound from "use-sound";
 import s from "./Footer.module.scss";
 import soundMenu from "../../sounds/menu.mp3";
-import { getSoundValue } from "../../redux/reducers/settings";
-import { showSettings } from "../../redux/actions/settings";
+import { getSoundValue } from "../../store/reducers/settings";
+import { showSettings } from "../../store/actions/settings";
 
 const Footer: React.FC = () => {
   const dispatch = useDispatch();

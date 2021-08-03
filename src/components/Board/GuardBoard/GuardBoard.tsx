@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./GuardBoard.module.scss";
 import { useSelector } from "react-redux";
-import { getGuardBoardAllowed } from "../../../redux/reducers/board";
+import { getGuardBoardAllowed } from "../../../store/reducers/board";
 
 const GuardBoard: React.FC = ({ children }) => {
   const guardAllowed = useSelector(getGuardBoardAllowed);

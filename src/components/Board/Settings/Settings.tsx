@@ -9,7 +9,7 @@ import {
   getMusicValue,
   getSoundValue,
   getWrapperCard,
-} from "../../../redux/reducers/settings";
+} from "../../../store/reducers/settings";
 import soundMenu from "../../../sounds/menu.mp3";
 import {
   hideSettings,
@@ -19,7 +19,7 @@ import {
   setMusicValue,
   setSoundValue,
   setWrapperCard,
-} from "../../../redux/actions/settings";
+} from "../../../store/actions/settings";
 import { getArenaList } from "../../../utils/containers/arena/arena";
 import { getBoardList } from "../../../utils/containers/board/board";
 import { getWrapperCardList } from "../../../utils/containers/wrapperCard/wrapperCard";

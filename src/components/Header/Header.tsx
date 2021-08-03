@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./Header.module.scss";
 import { useSelector } from "react-redux";
-import { getScore, getTime } from "../../redux/reducers/board";
+import { getScore, getTime } from "../../store/reducers/board";
 import getFormatTime from "../../utils/timer/timer";
 
 const Header: React.FC = () => {

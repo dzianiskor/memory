@@ -1,5 +1,5 @@
 import { CardsActionTypes } from "../actionTypes/cards";
-import { ICard } from "../reducers/cards";
+import { ICard } from "../interfaces/cards";
 
 export function setCardsDeck(cards: ICard[]) {
   return {

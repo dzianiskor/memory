@@ -1,30 +1,7 @@
 import { CardsActionTypes } from "../actionTypes/cards";
 import { IInitialState } from "../rootReducer";
 import { getStartDeck } from "../../utils/containers/deck/deck";
-
-interface ICompareCards {
-  ids: (number | string)[];
-  status: string;
-}
-
-type PayloadType = ICompareCards | string | number;
-
-interface IAction {
-  readonly type: CardsActionTypes;
-  readonly payload?: PayloadType;
-}
-
-export interface ICard {
-  id: number | string;
-  cardId: number | string;
-  status: string;
-  path: string;
-}
-
-export interface ICards {
-  cards: ICard[];
-  compareCard: any;
-}
+import { IAction, ICard, ICards, ICompareCards } from "../interfaces/cards";
 
 const initialState: ICards = {
   cards: getStartDeck(),

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import s from "./Result.module.scss";
 import { useSelector } from "react-redux";
-import { getScore, getTime } from "../../../redux/reducers/board";
+import { getScore, getTime } from "../../../store/reducers/board";
 import getFormatTime from "../../../utils/timer/timer";
 
 interface IResult {
