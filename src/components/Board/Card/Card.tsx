@@ -4,21 +4,20 @@ import useSound from "use-sound";
 import s from "./Card.module.scss";
 import clickSound from "../../../sounds/click.mp3";
 import hoverSound from "../../../sounds/hover.mp3";
+import { ICard } from "../../../redux/reducers/cards";
 import {
   getSoundValue,
   getWrapperCard,
 } from "../../../redux/reducers/settings";
 
-interface ICard {
-  id: number | string;
-  cardId: number | string;
-  status: string;
-  changeStatus: (id: string | number, cardId: string | number) => void;
+interface ICardFunc {
+  card: ICard;
+  changeStatus: (card: ICard) => void;
 }
 
-const Card: React.FC<ICard> = ({ id, cardId, status, changeStatus }) => {
+const Card: React.FC<ICardFunc> = ({ card, changeStatus }) => {
   const wrapperCard = useSelector(getWrapperCard);
-  const pathHero = `/img/heroes/${cardId}.png`;
+  const pathHero = `/img/heroes/${card.path}`;
   const pathWrapper = `/img/wrappers/${wrapperCard.path}`;
   const soundValue = useSelector(getSoundValue);
 
@@ -30,8 +29,8 @@ const Card: React.FC<ICard> = ({ id, cardId, status, changeStatus }) => {
   });
 
   const classes = [s.gCard]; // clicked, successCard, failCard
-  if (status) {
-    classes.push(s[status]);
+  if (card.status) {
+    classes.push(s[card.status]);
   }
 
   useEffect(() => {
@@ -47,7 +46,7 @@ const Card: React.FC<ICard> = ({ id, cardId, status, changeStatus }) => {
       className={classes.join(" ")}
       onClick={() => {
         playClickSound();
-        changeStatus(id, cardId);
+        changeStatus(card);
       }}
       onMouseEnter={() => playHoverSound()}
     >

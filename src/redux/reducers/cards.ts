@@ -2,16 +2,16 @@ import { CardsActionTypes } from "../actionTypes/cards";
 import { IInitialState } from "../rootReducer";
 import { getStartDeck } from "../../utils/containers/deck/deck";
 
-interface IPayload {
-  id?: number | string;
-  id1?: number | string;
-  id2?: number | string;
-  status?: string;
+interface ICompareCards {
+  ids: (number | string)[];
+  status: string;
 }
 
+type PayloadType = ICompareCards | string | number;
+
 interface IAction {
-  type: CardsActionTypes;
-  payload?: IPayload;
+  readonly type: CardsActionTypes;
+  readonly payload?: PayloadType;
 }
 
 export interface ICard {
@@ -42,23 +42,24 @@ const cards = (state: ICards = initialState, action: IAction) => {
       return {
         ...state,
         cards: state.cards.map((card) =>
-          card.id === action.payload!.id ? { ...card, status: "clicked" } : card
+          card.id === action.payload ? { ...card, status: "clicked" } : card
         ),
       };
     case CardsActionTypes.SET_STATUS_TWO_CARDS:
       return {
         ...state,
-        cards: state.cards.map((card) =>
-          card.id === action.payload!.id1 || card.id === action.payload!.id2
-            ? { ...card, status: action.payload!.status }
-            : card
-        ),
+        cards: state.cards.map((card) => {
+          const payload = action.payload as ICompareCards;
+          return payload.ids.indexOf(card.id) !== -1
+            ? { ...card, status: payload.status }
+            : card;
+        }),
       };
     case CardsActionTypes.ADD_COMPARE_CARD:
       return {
         ...state,
         compareCard: state.cards.find(
-          (card: ICard) => card.id === action.payload!.id
+          (card: ICard) => card.id === action.payload
         ),
       };
     case CardsActionTypes.CLEAR_COMPARE_CARD:

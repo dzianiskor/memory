@@ -13,6 +13,7 @@ import failSound from "../../sounds/error.mp3";
 import clickSound from "../../sounds/click.mp3";
 import music from "../../sounds/music.mp3";
 import soundMenu from "../../sounds/menu.mp3";
+import { getStartDeck } from "../../utils/containers/deck/deck";
 import {
   incrementScore,
   incrementTimer,
@@ -35,7 +36,6 @@ import {
   getMusicValue,
   getSoundValue,
 } from "../../redux/reducers/settings";
-import { getStartDeck } from "../../utils/containers/deck/deck";
 
 const Board: React.FC = () => {
   const dispatch = useDispatch();
@@ -128,25 +128,25 @@ const Board: React.FC = () => {
     }, 1000);
   };
 
-  const changeStatus = (id: string | number, cardId: number | string) => {
+  const changeStatus = (card: ICard) => {
     dispatch(setGuardBoardAllowed(false));
-    dispatch(clickOnCard(id));
-    if (compareCard && compareCard.id !== id) {
-      if (compareCard.cardId === cardId) {
+    dispatch(clickOnCard(card));
+    if (compareCard && compareCard.id !== card.id) {
+      if (compareCard.cardId === card.cardId) {
         setTimeout(() => {
           playSuccessSound();
-          dispatch(setStatusTwoCards(id, compareCard.id, "successCard"));
+          dispatch(setStatusTwoCards([card.id, compareCard.id], "successCard"));
           dispatch(incrementScore());
         }, 1000);
       } else {
         setTimeout(() => {
           playFailSound();
-          dispatch(setStatusTwoCards(id, compareCard.id, "failCard"));
+          dispatch(setStatusTwoCards([card.id, compareCard.id], "failCard"));
         }, 1000);
       }
       dispatch(clearCompareCard());
     } else {
-      dispatch(addCompareCard(id));
+      dispatch(addCompareCard(card.id));
     }
     setTimeout(() => {
       dispatch(setGuardBoardAllowed(true));
@@ -163,13 +163,7 @@ const Board: React.FC = () => {
       >
         <GuardBoard>
           {cards.map((card: ICard) => (
-            <Card
-              id={card.id}
-              key={card.id}
-              cardId={card.cardId}
-              status={card.status}
-              changeStatus={changeStatus}
-            />
+            <Card key={card.id} card={card} changeStatus={changeStatus} />
           ))}
         </GuardBoard>
         {showResult && (

@@ -8,21 +8,17 @@ export function setCardsDeck(cards: ICard[]) {
   };
 }
 
-export function clickOnCard(id: number | string) {
+export function clickOnCard(card: ICard) {
   return {
     type: CardsActionTypes.CLICK_ON_CARD,
-    payload: { id },
+    payload: card.id,
   };
 }
 
-export function setStatusTwoCards(
-  id1: number | string,
-  id2: number | string,
-  status: string
-) {
+export function setStatusTwoCards(ids: (number | string)[], status: string) {
   return {
     type: CardsActionTypes.SET_STATUS_TWO_CARDS,
-    payload: { id1, id2, status },
+    payload: { ids, status },
   };
 }
 
@@ -35,7 +31,7 @@ export function clearCompareCard() {
 export function addCompareCard(id: number | string) {
   return {
     type: CardsActionTypes.ADD_COMPARE_CARD,
-    payload: { id },
+    payload: id,
   };
 }
 
