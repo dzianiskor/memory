@@ -1,3 +1,5 @@
+import { getSavedData, SaveNames } from "../../saveGame/saveGame";
+
 export enum DifficultTypes {
   EASY = "Easy",
   NORMAL = "Normal",
@@ -19,6 +21,11 @@ export function getDifficultList(): IDifficult[] {
 }
 
 export function getStartDifficult(): IDifficult {
+  const savedDifficult = getSavedData(SaveNames.DIFFICULT);
+  if (savedDifficult) {
+    return savedDifficult as IDifficult;
+  }
+
   return (
     getDifficultList().find(
       (difficult) => difficult.value === DifficultTypes.HARD

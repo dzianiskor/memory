@@ -26,7 +26,6 @@ export function getAllDeck() {
 }
 
 export function getStartDeck(difficult: IDifficult = getStartDifficult()) {
-  // Check if we have Local storage Deck or difficult
   const result = getAllDeck().splice(0, difficult.countCards);
   shuffle(result);
 

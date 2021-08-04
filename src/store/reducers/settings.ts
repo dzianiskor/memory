@@ -1,18 +1,25 @@
 import { SettingsActionTypes } from "../actionTypes/settings";
 import { IInitialState } from "../rootReducer";
 import { getStartArena } from "../../utils/containers/arena/arena";
-import { getStartBoard } from "../../utils/containers/board/board";
 import { getStartWrapperCard } from "../../utils/containers/wrapperCard/wrapperCard";
-import {getStartDifficult} from "../../utils/containers/difficult/difficult";
-import {IAction, ISettings} from "../interfaces/settings";
+import { IAction, IMainProperties, ISettings } from "../interfaces/settings";
+import { getSavedData, SaveNames } from "../../utils/saveGame/saveGame";
+import { getStartBoard } from "../../utils/containers/board/board";
+import {
+  getStartDifficult,
+  IDifficult,
+} from "../../utils/containers/difficult/difficult";
 
 const initialState: ISettings = {
-  arena: getStartArena(),
-  board: getStartBoard(),
-  wrapperCard: getStartWrapperCard(),
-  difficult: getStartDifficult(),
-  musicValue: 0.3,
-  soundValue: 0.5,
+  arena: (getSavedData(SaveNames.ARENA) as IMainProperties) ?? getStartArena(),
+  board: (getSavedData(SaveNames.BOARD) as IMainProperties) ?? getStartBoard(),
+  wrapperCard:
+    (getSavedData(SaveNames.WRAPPER_CARD) as IMainProperties) ??
+    getStartWrapperCard(),
+  difficult:
+    (getSavedData(SaveNames.DIFFICULT) as IDifficult) ?? getStartDifficult(),
+  musicValue: (getSavedData(SaveNames.MUSIC) as number) ?? 0.3,
+  soundValue: (getSavedData(SaveNames.SOUND) as number) ?? 0.5,
   isShowSettings: false,
 };
 

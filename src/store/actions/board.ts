@@ -13,6 +13,13 @@ export function incrementScore() {
   };
 }
 
+export function setScore(score: number) {
+  return {
+    type: BoardActionTypes.SET_SCORE,
+    payload: score,
+  };
+}
+
 export function incrementTimer() {
   return {
     type: BoardActionTypes.INCREMENT_TIMER,

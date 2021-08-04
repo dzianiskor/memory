@@ -7,7 +7,7 @@ import Card from "./Card/Card";
 import Settings from "./Settings/Settings";
 import s from "./Board.module.scss";
 import { getCards, getCompareCard } from "../../store/reducers/cards";
-import { getScore } from "../../store/reducers/board";
+import { getScore, getTime } from "../../store/reducers/board";
 import successSound from "../../sounds/success.mp3";
 import failSound from "../../sounds/error.mp3";
 import clickSound from "../../sounds/click.mp3";
@@ -19,6 +19,7 @@ import {
   incrementTimer,
   restartBoard,
   setGuardBoardAllowed,
+  setScore,
 } from "../../store/actions/board";
 import {
   addCompareCard,
@@ -37,6 +38,11 @@ import {
   getSoundValue,
 } from "../../store/reducers/settings";
 import { ICard } from "../../store/interfaces/cards";
+import {
+  clearSavedData,
+  SaveNames,
+  setSavedData,
+} from "../../utils/saveGame/saveGame";
 
 const Board: React.FC = () => {
   const dispatch = useDispatch();
@@ -68,6 +74,7 @@ const Board: React.FC = () => {
   const timer: { current: NodeJS.Timeout | null } = useRef(null);
   const isShowSettings = useSelector(getIsShowSettings);
   const difficult = useSelector(getDifficult);
+  const timerValue = useSelector(getTime);
 
   useEffect(() => {
     if (timer.current) {
@@ -80,6 +87,16 @@ const Board: React.FC = () => {
   }, [difficult]);
 
   useEffect(() => {
+    if (timer.current) {
+      setSavedData(SaveNames.CARD, cards);
+      setSavedData(SaveNames.SCORE, score);
+      setSavedData(SaveNames.TIMER, timerValue);
+    }
+    checkFinishGame();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [score]);
+
+  useEffect(() => {
     if (!showResult) {
       timer.current = setInterval(() => {
         dispatch(incrementTimer());
@@ -90,11 +107,6 @@ const Board: React.FC = () => {
       clearInterval(timer.current as NodeJS.Timeout);
     };
   }, [dispatch, showResult]);
-
-  useEffect(() => {
-    checkFinishGame();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [score]);
 
   useEffect(() => {
     playMusic();
@@ -112,12 +124,13 @@ const Board: React.FC = () => {
     const countSuccessCards = cards.filter(
       (card) => card.status === "successCard"
     ).length;
-    if (countSuccessCards === /*cards.length*/ 2) {
+    if (countSuccessCards === cards.length) {
       setShowResult(true);
     }
   };
 
-  const restartGame = () => {
+  const restartGame = (total: number) => {
+    clearSavedData();
     playSoundMenu();
     dispatch(closeCards());
     playClickSound();
@@ -125,6 +138,8 @@ const Board: React.FC = () => {
       dispatch(restartBoard());
       playClickSound();
       dispatch(restartCards());
+      dispatch(setScore(total));
+      // finished game => send Back end
       setShowResult(false);
     }, 1000);
   };

@@ -6,13 +6,14 @@ import getFormatTime from "../../../utils/timer/timer";
 
 interface IResult {
   timerIntervalId: NodeJS.Timeout | null;
-  restartGame: () => void;
+  restartGame: (total: number) => void;
 }
 
 const Result: React.FC<IResult> = ({ timerIntervalId, restartGame }) => {
   const score: number = useSelector(getScore);
   const timer: number = useSelector(getTime);
   const bonus: number = 5;
+  const total: number = score + bonus;
 
   useEffect(() => {
     if (timerIntervalId) {
@@ -37,11 +38,11 @@ const Result: React.FC<IResult> = ({ timerIntervalId, restartGame }) => {
             <h2>Bonus: {bonus}</h2>
           </div>
           <div className={s.resultSection}>
-            <h2 className={s.total}>Total: {bonus + score}</h2>
+            <h2 className={s.total}>Total: {total}</h2>
           </div>
         </div>
         <div className={s.resultSection}>
-          <button onClick={restartGame}>Restart</button>
+          <button onClick={() => restartGame(total)}>Restart</button>
         </div>
       </div>
     </div>

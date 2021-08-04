@@ -1,11 +1,12 @@
 import { BoardActionTypes } from "../actionTypes/board";
 import { IInitialState } from "../rootReducer";
-import {IAction, IBoard} from "../interfaces/board";
+import { IAction, IBoard } from "../interfaces/board";
+import { getSavedData, SaveNames } from "../../utils/saveGame/saveGame";
 
 const initialState: IBoard = {
   guardBoardAllowed: true,
-  score: 0,
-  timer: 0,
+  score: (getSavedData(SaveNames.SCORE) as number) ?? 0,
+  timer: (getSavedData(SaveNames.TIMER) as number) ?? 0,
 };
 
 const board = (state: IBoard = initialState, action: IAction) => {
@@ -20,6 +21,11 @@ const board = (state: IBoard = initialState, action: IAction) => {
         ...state,
         score: state.score + 1,
       };
+    case BoardActionTypes.SET_SCORE:
+      return {
+        ...state,
+        score: action.payload,
+      };
     case BoardActionTypes.INCREMENT_TIMER:
       return {
         ...state,
@@ -27,7 +33,9 @@ const board = (state: IBoard = initialState, action: IAction) => {
       };
     case BoardActionTypes.RESTART_GAME:
       return {
-        ...initialState,
+        ...state,
+        timer: 0,
+        guardBoardAllowed: true,
       };
     default:
       return state;

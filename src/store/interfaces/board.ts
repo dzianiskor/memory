@@ -1,12 +1,12 @@
-import {BoardActionTypes} from "../actionTypes/board";
+import { BoardActionTypes } from "../actionTypes/board";
 
 export interface IAction {
-    type: BoardActionTypes;
-    payload?: boolean;
+  type: BoardActionTypes;
+  payload?: boolean | number;
 }
 
 export interface IBoard {
-    guardBoardAllowed: boolean;
-    score: number;
-    timer: number;
+  guardBoardAllowed: boolean;
+  score: number;
+  timer: number;
 }

@@ -24,6 +24,7 @@ import { getArenaList } from "../../../utils/containers/arena/arena";
 import { getBoardList } from "../../../utils/containers/board/board";
 import { getWrapperCardList } from "../../../utils/containers/wrapperCard/wrapperCard";
 import { getDifficultList } from "../../../utils/containers/difficult/difficult";
+import { SaveNames, setSavedData } from "../../../utils/saveGame/saveGame";
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -53,9 +54,11 @@ const Settings = () => {
             <input
               type="range"
               value={musicValue * 100}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                dispatch(setMusicValue(Number.parseInt(e.target.value) / 100))
-              }
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                const musicValue = Number.parseInt(e.target.value) / 100;
+                dispatch(setMusicValue(musicValue));
+                setSavedData(SaveNames.MUSIC, musicValue);
+              }}
             />
           </div>
         </div>
@@ -65,9 +68,11 @@ const Settings = () => {
             <input
               type="range"
               value={soundValue * 100}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                dispatch(setSoundValue(Number.parseInt(e.target.value) / 100))
-              }
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                const soundValue = Number.parseInt(e.target.value) / 100;
+                dispatch(setSoundValue(soundValue));
+                setSavedData(SaveNames.SOUND, soundValue);
+              }}
             />
           </div>
         </div>
@@ -85,6 +90,7 @@ const Settings = () => {
                   onClick={() => {
                     playSoundMenu();
                     dispatch(setArena(arena));
+                    setSavedData(SaveNames.ARENA, arena);
                   }}
                 >
                   {arena.name}
@@ -107,6 +113,7 @@ const Settings = () => {
                   onClick={() => {
                     playSoundMenu();
                     dispatch(setBoard(board));
+                    setSavedData(SaveNames.BOARD, board);
                   }}
                 >
                   {board.name}
@@ -129,6 +136,7 @@ const Settings = () => {
                   onClick={() => {
                     playSoundMenu();
                     dispatch(setWrapperCard(wrapperCard));
+                    setSavedData(SaveNames.WRAPPER_CARD, wrapperCard);
                   }}
                 >
                   {wrapperCard.name}
@@ -151,6 +159,7 @@ const Settings = () => {
                   onClick={() => {
                     playSoundMenu();
                     dispatch(setDifficult(difficult));
+                    setSavedData(SaveNames.DIFFICULT, difficult);
                   }}
                 >
                   {difficult.value}

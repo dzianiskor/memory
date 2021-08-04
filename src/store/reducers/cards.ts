@@ -1,10 +1,11 @@
 import { CardsActionTypes } from "../actionTypes/cards";
 import { IInitialState } from "../rootReducer";
-import { getStartDeck } from "../../utils/containers/deck/deck";
 import { IAction, ICard, ICards, ICompareCards } from "../interfaces/cards";
+import { getSavedData, SaveNames } from "../../utils/saveGame/saveGame";
+import { getStartDeck } from "../../utils/containers/deck/deck";
 
 const initialState: ICards = {
-  cards: getStartDeck(),
+  cards: (getSavedData(SaveNames.CARD) as ICard[]) ?? getStartDeck(),
   compareCard: null,
 };
 
@@ -53,7 +54,9 @@ const cards = (state: ICards = initialState, action: IAction) => {
       };
     case CardsActionTypes.RESTART_GAME:
       return {
-        ...initialState,
+        ...state,
+        cards: getStartDeck(),
+        compareCard: null,
       };
     default:
       return state;
