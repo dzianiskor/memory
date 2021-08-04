@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import useSound from "use-sound";
@@ -6,6 +6,10 @@ import s from "./Footer.module.scss";
 import soundMenu from "../../sounds/menu.mp3";
 import { getSoundValue } from "../../store/reducers/settings";
 import { showSettings } from "../../store/actions/settings";
+import {
+  FullScreenHandler,
+  IFullScreenHandle,
+} from "../../hoc/FullScreenHandler";
 
 const Footer: React.FC = () => {
   const dispatch = useDispatch();
@@ -21,6 +25,10 @@ const Footer: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const fullScreenHandler: IFullScreenHandle = useContext(
+    FullScreenHandler
+  ) as IFullScreenHandle;
+
   return (
     <footer>
       <div className={s.buttonGroupWrapper}>
@@ -32,9 +40,27 @@ const Footer: React.FC = () => {
           </NavLink>
         </div>
         <div className={s.buttonGroup}>
-          <button className={s.settingButton} onClick={() => playSoundMenu()}>
-            <img src="/img/full_screen1.png" alt="full_screen" />
-          </button>
+          {!fullScreenHandler.active ? (
+            <button
+              className={s.settingButton}
+              onClick={() => {
+                fullScreenHandler.enter();
+                playSoundMenu();
+              }}
+            >
+              <img src="/img/full_screen1.png" alt="full_screen" />
+            </button>
+          ) : (
+            <button
+              className={s.settingButton}
+              onClick={() => {
+                fullScreenHandler.exit();
+                playSoundMenu();
+              }}
+            >
+              <img src="/img/full_screen2.png" alt="full_screen" />
+            </button>
+          )}
         </div>
         <div className={s.buttonGroup}>
           <button
